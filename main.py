@@ -7,14 +7,14 @@ screen_d = 900
 screen_h = 600
 screen = pygame.display.set_mode((screen_d, screen_h))
 pygame.display.set_caption("MyFirstGame - Snake")
-icon = pygame.image.load('images/4591880_animal_carnivore_cartoon_fauna_snake_icon.png')
+icon = pygame.image.load('4591880_animal_carnivore_cartoon_fauna_snake_icon.png')
 pygame.display.set_icon(icon)
 
 white = (255, 255, 255)
 black = (0, 0, 0)
 red = (255, 0, 0)
 
-myfont = pygame.font.Font('fonts/Teko-Bold.ttf', 40)
+myfont = pygame.font.Font('Teko-Bold.ttf', 40)
 
 def message(text, color):
     screen.blit(myfont.render(text, False, color), (screen_d // 2 - 100, screen_h // 2 - 50))
