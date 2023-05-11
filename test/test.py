@@ -1,8 +1,8 @@
 import unittest
 
 
-import snake
-import apple
+from src import snake
+from src import apple
 
 
 class TestSnakeMethods(unittest.TestCase):
