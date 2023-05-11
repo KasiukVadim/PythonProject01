@@ -1,8 +1,8 @@
 import pygame
 import sys
 import pygame_menu
-import Snake_class
-import Apple_class
+import snake
+import apple
 
 pygame.init()
 bg_image = pygame.image.load('images/logo.jpg')
@@ -49,10 +49,10 @@ def start_the_game():
     d_row, d_col = 1, 0
     score = 0
     speed = 0
-    snake = Snake_class.Snake(COUNT_BLOCKS // 2, COUNT_BLOCKS // 2)
-    apple = Apple_class.Apple(snake.snake_blocks, 1, True, COUNT_BLOCKS)
-    golden_apple = Apple_class.Apple(snake.snake_blocks, 3, False, COUNT_BLOCKS)
-    black_apple = Apple_class.Apple(snake.snake_blocks, -5, False, COUNT_BLOCKS)
+    Snake = snake.Snake(COUNT_BLOCKS // 2, COUNT_BLOCKS // 2)
+    Apple = apple.Apple(Snake.snake_blocks, 1, True, COUNT_BLOCKS)
+    golden_apple = apple.Apple(Snake.snake_blocks, 3, False, COUNT_BLOCKS)
+    black_apple = apple.Apple(Snake.snake_blocks, -5, False, COUNT_BLOCKS)
     while True:
 
         for event in pygame.event.get():
@@ -85,35 +85,35 @@ def start_the_game():
                     colour = WHITE
                 draw_block(colour, row, column, SIZE_BLOCK, MARGIN, HEADER_MARGIN)
 
-        if not snake.is_inside(SIZE_BLOCK):
+        if not Snake.is_inside(SIZE_BLOCK):
             print('crash Out')
             records.append([score, name.get_value()])
             break
-        if snake.is_crash():
+        if Snake.is_crash():
             print('crash Out')
             records.append([score, name.get_value()])
             break
-        draw_block(RED, apple.x, apple.y, SIZE_BLOCK, MARGIN, HEADER_MARGIN)
+        draw_block(RED, Apple.x, Apple.y, SIZE_BLOCK, MARGIN, HEADER_MARGIN)
         if golden_apple.flag:
             draw_block(YELLOW, golden_apple.x, golden_apple.y, SIZE_BLOCK, MARGIN, HEADER_MARGIN)
         if black_apple.flag:
             draw_block(BLACK, black_apple.x, black_apple.y, SIZE_BLOCK, MARGIN, HEADER_MARGIN)
 
-        for block in snake.snake_blocks:
+        for block in Snake.snake_blocks:
             draw_block(SNAKE_COLOR, block[0], block[1], SIZE_BLOCK, MARGIN, HEADER_MARGIN)
-        score, speed = apple.try_to_eat_apple(score, speed, snake.snake_blocks, golden_apple, black_apple)
-        if not apple.flag:
-            apple = Apple_class.Apple(snake.snake_blocks, 1, True, COUNT_BLOCKS)
-        score, speed = golden_apple.try_to_eat_apple(score, speed, snake.snake_blocks, golden_apple, black_apple)
+        score, speed = Apple.try_to_eat_apple(score, speed, Snake.snake_blocks, golden_apple, black_apple)
+        if not Apple.flag:
+            Apple = apple.Apple(Snake.snake_blocks, 1, True, COUNT_BLOCKS)
+        score, speed = golden_apple.try_to_eat_apple(score, speed, Snake.snake_blocks, golden_apple, black_apple)
         if not golden_apple.flag:
-            golden_apple = Apple_class.Apple(snake.snake_blocks, 3, False, COUNT_BLOCKS)
-        score, speed = black_apple.try_to_eat_apple(score, speed, snake.snake_blocks, golden_apple, black_apple)
+            golden_apple = apple.Apple(Snake.snake_blocks, 3, False, COUNT_BLOCKS)
+        score, speed = black_apple.try_to_eat_apple(score, speed, Snake.snake_blocks, golden_apple, black_apple)
         if not black_apple.flag:
-            black_apple = Apple_class.Apple(snake.snake_blocks, -5, False, COUNT_BLOCKS)
+            black_apple = apple.Apple(Snake.snake_blocks, -5, False, COUNT_BLOCKS)
 
-        new_head = [d_row + snake.snake_blocks[0][0], d_col + snake.snake_blocks[0][1]]
-        snake.snake_blocks.insert(0, new_head)
-        snake.snake_blocks.pop()
+        new_head = [d_row + Snake.snake_blocks[0][0], d_col + Snake.snake_blocks[0][1]]
+        Snake.snake_blocks.insert(0, new_head)
+        Snake.snake_blocks.pop()
         pygame.display.flip()
         timer.tick(3 + speed)
 
