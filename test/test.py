@@ -1,18 +1,18 @@
 import unittest
 
 
-import Snake_class
-import Apple_class
+import snake
+import apple
 
 
 class TestSnakeMethods(unittest.TestCase):
     def setUp(self) -> None:
-        self.sn1 = Snake_class.Snake(1, 1)
-        self.sn2 = Snake_class.Snake(10, 8)
+        self.sn1 = snake.Snake(1, 1)
+        self.sn2 = snake.Snake(10, 8)
         sn2_list = [[11, 8], [12, 8], [13, 8], [13, 9], [12, 9], [11, 9], [10, 9], [10, 8]]
         for block in sn2_list:
             self.sn2.snake_blocks.append(block)
-        self.sn3 = Snake_class.Snake(5, 13)
+        self.sn3 = snake.Snake(5, 13)
         sn3_list = [[4, 13], [3, 13], [3, 12], [3, 11]]
         for block in sn3_list:
             self.sn3.snake_blocks.append(block)
@@ -40,11 +40,11 @@ class TestSnakeMethods(unittest.TestCase):
 class TestAppleMethods(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.apple = Apple_class.Apple([[0, 0]], 1, True, 20)
+        self.apple = apple.Apple([[0, 0]], 1, True, 20)
         self.apple.x, self.apple.y = 10, 10
-        self.golden_apple = Apple_class.Apple([[0, 0]], 3, True, 20)
+        self.golden_apple = apple.Apple([[0, 0]], 3, True, 20)
         self.golden_apple.x, self.golden_apple.y = 10, 10
-        self.black_apple = Apple_class.Apple([[0, 0]], -5, True, 20)
+        self.black_apple = apple.Apple([[0, 0]], -5, True, 20)
         self.black_apple.x, self.black_apple.y = 10, 10
 
     def test_try_to_eat(self):
