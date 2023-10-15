@@ -1,23 +1,6 @@
 import random
 
 
-class Snake:
-    def __init__(self, x, y):
-        self.sn_bl = [[x, y]]
-
-    def get_head(self):
-        return self.sn_bl[0]
-
-    def is_inside(self, screen_size):
-        return 0 <= self.sn_bl[0][0] < screen_size and 0 <= self.sn_bl[0][1] < screen_size
-
-    def is_crash(self):
-        for i in range(1, len(self.sn_bl) - 1):
-            if self.sn_bl[i] == self.sn_bl[0]:
-                return True
-        return False
-
-
 class Apple:
     def __init__(self, snake_head, value, flag, cn_bl):
         x_new = random.randint(0, cn_bl - 1)
